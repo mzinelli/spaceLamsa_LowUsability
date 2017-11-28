@@ -26,7 +26,7 @@ public class Launcher {
 
 		JFrame f = new JFrame("Space Invaders");
 
-		f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
 		f.setResizable(false);
 		f.setLocationRelativeTo(null);
@@ -37,18 +37,18 @@ public class Launcher {
 		f.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				StateMachine.setActiveState("game-menu");
-				int confirm = JOptionPane.showConfirmDialog(null, "Você deseja sair do jogo? =(", "Atenção",
-						JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-
-				if (confirm == JOptionPane.YES_OPTION) {
-					// verifica se o usuário clicou no botão YES
+//				int confirm = JOptionPane.showConfirmDialog(null, "Você deseja sair do jogo? =(", "Atenção",
+//						JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+//
+//				if (confirm == JOptionPane.YES_OPTION) {
+//					// verifica se o usuário clicou no botão YES
 					System.exit(0);
 
-				} else {
-					StateMachine.setActiveState("gameplay");
-				}
-				// System.exit(0);
-
+//				} else {
+//					StateMachine.setActiveState("gameplay");
+//				}
+//				// System.exit(0);
+//
 			}
 		});
 	}

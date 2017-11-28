@@ -56,11 +56,17 @@ public class InitialMenu {
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 					frame.setResizable(false);
-
+					
+					
 					JButton button = new JButton("Iniciar");
-					button.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 30));
+					
+					button.setOpaque(true);
+					button.setForeground(Color.YELLOW);
+					button.setBackground(Color.YELLOW);
+					button.setFont(new Font("Microsoft Sans Serif", Font.HANGING_BASELINE, 30));
+
 					label.setLayout(null);
-					button.setBounds(800, 300, 300, 60);
+					button.setBounds(800, 600, 200, 60);
 					button.addActionListener(new ActionListener() {
 
 						@Override
@@ -75,8 +81,10 @@ public class InitialMenu {
 
 					JButton buttonExit = new JButton("Sair");
 					label.setLayout(null);
-					buttonExit.setBounds(800, 400, 300, 60);
-					buttonExit.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 30));
+					buttonExit.setBounds(200, 200, 300, 60);
+					buttonExit.setBackground(Color.YELLOW);
+					buttonExit.setForeground(Color.YELLOW);
+					buttonExit.setFont(new Font("Microsoft Sans Serif", Font.HANGING_BASELINE, 30));
 					buttonExit.addActionListener(new ActionListener() {
 
 						@Override
@@ -93,16 +101,16 @@ public class InitialMenu {
 					frame.addWindowListener(new WindowAdapter() {
 						public void windowClosing(WindowEvent e) {
 
-							int confirm = JOptionPane.showConfirmDialog(null, "Você deseja sair do jogo? =(", "Atenção",
-									JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-
-							if (confirm == JOptionPane.YES_OPTION) {
-								// verifica se o usuário clicou no botão YES
+//							int confirm = JOptionPane.showConfirmDialog(null, "Você deseja sair do jogo? =(", "Atenção",
+//									JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+//
+//							if (confirm == JOptionPane.YES_OPTION) {
+//								// verifica se o usuário clicou no botão YES
 								System.exit(0);
-
-							} else {
-								StateMachine.setActiveState("gameplay");
-							}
+//
+//							} else {
+//								StateMachine.setActiveState("gameplay");
+//							}
 							// System.exit(0);
 
 						}

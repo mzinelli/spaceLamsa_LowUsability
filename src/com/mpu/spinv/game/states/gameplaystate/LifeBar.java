@@ -44,6 +44,7 @@ public class LifeBar extends Group {
 	 */
 	private void initializeLifeIcons() {
 		for (int i = 0; i < MAX_LIFES; i++) {
+		
 			add(new LifeIcon());
 		}
 	}
@@ -75,7 +76,7 @@ public class LifeBar extends Group {
 			
 			sprite = new Sprite(StateMachine.spriteSheet.getSprite(775, 397, 32, 25));
 			
-			setStaticSprite(sprite);
+			//setStaticSprite(sprite);
 			setScreenBound(true);
 
 		}

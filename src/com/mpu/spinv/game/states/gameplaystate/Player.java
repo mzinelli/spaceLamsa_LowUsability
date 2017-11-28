@@ -79,7 +79,7 @@ public class Player extends GameEntity {
 		 */
 
 		// Moving up
-		on(new KeyTriggerEvent(KeyEvent.VK_UP, (k, t) -> {
+		on(new KeyTriggerEvent(KeyEvent.VK_I, (k, t) -> {
 			if (t == KeyTriggerEvent.KEY_PRESSED)
 				moveUp(false);
 			else if (t == KeyTriggerEvent.KEY_RELEASED)
@@ -87,7 +87,7 @@ public class Player extends GameEntity {
 		}));
 
 		// Moving down
-		on(new KeyTriggerEvent(KeyEvent.VK_DOWN, (k, t) -> {
+		on(new KeyTriggerEvent(KeyEvent.VK_K, (k, t) -> {
 			if (t == KeyTriggerEvent.KEY_PRESSED)
 				moveDown(false);
 			else if (t == KeyTriggerEvent.KEY_RELEASED)
@@ -95,7 +95,7 @@ public class Player extends GameEntity {
 		}));
 
 		// Moving right
-		on(new KeyTriggerEvent(KeyEvent.VK_RIGHT, (k, t) -> {
+		on(new KeyTriggerEvent(KeyEvent.VK_L, (k, t) -> {
 			if (t == KeyTriggerEvent.KEY_PRESSED)
 				moveRight(true);
 			else if (t == KeyTriggerEvent.KEY_RELEASED)
@@ -103,7 +103,7 @@ public class Player extends GameEntity {
 		}));
 
 		// Moving left
-		on(new KeyTriggerEvent(KeyEvent.VK_LEFT, (k, t) -> {
+		on(new KeyTriggerEvent(KeyEvent.VK_J, (k, t) -> {
 			if (t == KeyTriggerEvent.KEY_PRESSED)
 				moveLeft(true);
 			else if (t == KeyTriggerEvent.KEY_RELEASED)
@@ -111,7 +111,7 @@ public class Player extends GameEntity {
 		}));
 
 		// Shoot
-		on(new KeyTriggerEvent(KeyEvent.VK_SPACE, (k, t) -> {
+		on(new KeyTriggerEvent(KeyEvent.VK_Q, (k, t) -> {
 			if (t == KeyTriggerEvent.KEY_RELEASED) {
 				Shot shot = new Shot(x + getWidth() / 2, y);
 				addChild(shot);

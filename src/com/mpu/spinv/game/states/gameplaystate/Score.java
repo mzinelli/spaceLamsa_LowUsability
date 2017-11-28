@@ -16,7 +16,7 @@ public class Score extends GameText {
 	private static final boolean INITIAL_VISIBILITY = true;
 	
 	private static final String SCORE_TEXT = "SCORE: 0000";
-	private static final Color TEXT_COLOR = Color.WHITE;
+	private static final Color TEXT_COLOR = Color.BLACK;
 	
 	// -------------------------------------------
 	

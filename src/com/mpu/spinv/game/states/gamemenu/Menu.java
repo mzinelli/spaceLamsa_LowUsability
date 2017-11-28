@@ -62,15 +62,9 @@ public class Menu extends Group {
 		}));
 
 		add(new MenuItem(0, 0, "SAIR", (i, j) -> {
-			int confirm = JOptionPane.showConfirmDialog(null, "Você deseja sair do jogo? =(", null,
-					JOptionPane.OK_CANCEL_OPTION);
-
-			if (confirm == JOptionPane.YES_OPTION) {
-				// verifica se o usuário clicou no botão YES
+		
 				System.exit(0);
-			} else {
-				StateMachine.setActiveState("gameplay");
-			}
+			
 			// System.exit(0);
 		}));
 

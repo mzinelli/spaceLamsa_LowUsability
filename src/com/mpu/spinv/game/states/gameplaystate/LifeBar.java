@@ -57,7 +57,9 @@ public class LifeBar extends Group {
 			life--;
 			getGameEntities().remove(getGameEntities().size()-1);
 		}
-
+		if(life <=0){
+			System.exit(0);
+		}
 	}
 
 	private class LifeIcon extends GameEntity {

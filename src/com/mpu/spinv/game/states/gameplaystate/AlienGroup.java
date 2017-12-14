@@ -26,7 +26,7 @@ public class AlienGroup extends Group {
 	private static final int X = 50;
 	private static final int Y = 50;
 
-	private static final int TOTAL_ALIENS = 40;
+	private static final int TOTAL_ALIENS = 60;
 
 	private static final int VELOCITY = 1;
 
@@ -43,7 +43,7 @@ public class AlienGroup extends Group {
 		this.playerLifebar = playerLifebar;
 		this.shot = new AlienShot(0, 0);
 
-		setGridSize(10);
+		setGridSize(15);
 		setSpacing(10, 10);
 
 		for (int i = 0; i < TOTAL_ALIENS; i++)

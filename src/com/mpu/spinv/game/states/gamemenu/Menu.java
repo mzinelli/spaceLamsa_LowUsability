@@ -54,7 +54,7 @@ public class Menu extends Group {
 		add(new MenuItem(0, 0, "AJUDA", (i, j) -> {
 			 
 			JOptionPane.showMessageDialog(null,
-			 " Para jogar utilize:\n" + "\nSetas Direcionais: \n <- Esquerda \n-> Direita \n" +"Barra de Espaço - Atirar",
+			 " Para jogar utilize:\n" + "\nTeclas: \n J - Esquerda \nL - Direita \n" +"Q- Atirar",
 			 "Ajuda",
 			 JOptionPane.INFORMATION_MESSAGE);
 

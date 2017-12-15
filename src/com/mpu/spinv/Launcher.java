@@ -24,7 +24,7 @@ public class Launcher {
 
 	public Launcher() {
 
-		JFrame f = new JFrame("Space Invaders");
+		JFrame f = new JFrame("Space Lamsa LU");
 
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);

@@ -43,7 +43,7 @@ public class Boss extends GameEntity {
 
 	private final int SCORE_VALUE = 50;
 
-	private int life = 20;
+	private int life = 30;
 
 	/**
 	 * A reference to the score object.
@@ -58,7 +58,7 @@ public class Boss extends GameEntity {
 		// Setting up the boss sprite
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(Boss.class.getResource("/resources/img/ugly_boss.png"));
+			image = ImageIO.read(Boss.class.getResource("/resources/img/ugly.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

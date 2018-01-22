@@ -4,6 +4,7 @@ import com.mpu.spinv.engine.StateMachine;
 import com.mpu.spinv.engine.model.State;
 import com.mpu.spinv.game.states.gameplaystate.AlienGroup;
 import com.mpu.spinv.game.states.gameplaystate.Background;
+import com.mpu.spinv.game.states.gameplaystate.Boss;
 import com.mpu.spinv.game.states.gameplaystate.HelpText;
 import com.mpu.spinv.game.states.gameplaystate.LifeBar;
 import com.mpu.spinv.game.states.gameplaystate.Player;
@@ -35,6 +36,7 @@ public class GameplayState extends State {
 
 	private Player player;
 	private AlienGroup alienGroup;
+	private Boss boss;
 
 	public GameplayState() {
 		super(SAVE_RESOURCES);
@@ -48,8 +50,9 @@ public class GameplayState extends State {
 		background = new Background();
 		lifebar = new LifeBar();
 		score = new Score();
-		player = new Player(score);
-		alienGroup = new AlienGroup(lifebar);
+		boss = new Boss(score);
+		player = new Player(score, boss);
+		alienGroup = new AlienGroup(lifebar, boss);
 		helpText = new HelpText();
 		soundIcon = new SoundIcon();
 	}
@@ -59,6 +62,7 @@ public class GameplayState extends State {
 		addResource("background", background);
 		addResource("player", player);
 		addResource("alien-group", alienGroup);
+		addResource("boss", boss);
 		addResource("lifebar", lifebar);
 		addResource("score", score);
 		addResource("help-text", helpText);

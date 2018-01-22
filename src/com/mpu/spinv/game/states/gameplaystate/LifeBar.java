@@ -78,7 +78,7 @@ public class LifeBar extends Group {
 			
 			sprite = new Sprite(StateMachine.spriteSheet.getSprite(775, 397, 32, 25));
 			
-			//setStaticSprite(sprite);
+			setStaticSprite(sprite);
 			setScreenBound(true);
 
 		}

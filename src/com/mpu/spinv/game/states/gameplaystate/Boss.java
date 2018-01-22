@@ -89,48 +89,9 @@ public class Boss extends GameEntity {
 
 	@Override
 	public void die() {
-			JLabel label = new JLabel(new ImageIcon(getClass().getResource("/resources/img/final.jpg")));
-
-			JFrame frame = new JFrame("Space Lamsa");
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setContentPane(label);
-			// frame.setLayout(new BorderLayout());
-			// JLabel text = new JLabel("Hello from the foreground");
-			// text.setForeground(Color.WHITE);
-			// text.setHorizontalAlignment(JLabel.CENTER);
-			// frame.add(text);
-			frame.pack();
-			frame.setLocationRelativeTo(null);
-			frame.setVisible(true);
-			frame.setResizable(false);
-			
-			JButton buttonExit = new JButton("Sair");
-//			/buttonExit.requestFocusInWindow(); 
-			buttonExit.setEnabled(false);
-			buttonExit.setBounds(400, 300, 300, 60);
-			buttonExit.setVisible(false);
-			buttonExit.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 30));
-			label.setLayout(null);
-			
-			buttonExit.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					
-					// TODO Auto-generated method stub
-					frame.setVisible(false);
-					StateMachine.setActiveState("gameplay");
-					System.exit(0);
-				}
-			});
-			label.add(buttonExit);
-//			new JOptionPane();
-//			JOptionPane.showMessageDialog(null, "Parabéns! Você conseguiu derrotar os inimigos e evitar a aniquilação da Terra. \nSua pontuação foi de: "+score.getScore()+" pontos");
-			
-		
  		super.die();
 		score.increment(SCORE_VALUE);
-		
+		System.exit(0);
 		
 //		frame.setVisible(false);
 		

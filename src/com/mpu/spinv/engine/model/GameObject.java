@@ -111,7 +111,7 @@ public abstract class GameObject {
 	}
 
 	public void update() {
-		if (!_moveOnlyIfVisible || visible) {
+		if (!dead && (!_moveOnlyIfVisible || visible)) {
 			x += dx;
 			y += dy;
 	

@@ -1,11 +1,9 @@
 package com.mpu.spinv.game.states.gameplaystate;
 
-import java.applet.Applet;
-import java.awt.Graphics;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 import com.mpu.spinv.engine.StateMachine;
+import com.mpu.spinv.engine.model.Animation;
 import com.mpu.spinv.engine.model.GameEntity;
 import com.mpu.spinv.engine.model.GameObject;
 import com.mpu.spinv.engine.model.Sprite;
@@ -29,7 +27,9 @@ public class Player extends GameEntity {
 	private static final int HEIGHT = 53;
 
 	private static final int INITIAL_X = Constants.WINDOW_WIDTH / 2 - WIDTH / 2;
-	private static final int INITIAL_Y = Constants.WINDOW_HEIGHT - HEIGHT - 40;
+	// = Constants.WINDOW_WIDTH / 2 - WIDTH / 2
+	// - WIDTH / 2
+	private static final int INITIAL_Y = 618;
 
 	private final int VELOCITY = 5;
 
@@ -37,13 +37,15 @@ public class Player extends GameEntity {
 
 	// -------------------- Sounds Player --------------------------
 
-	private Sound soundLevel;
-	private Sound soundShoot;
+		private Sound soundLevel;
+		private Sound soundShoot;
+		private Sound soundThird;
 
-	private boolean soundsOn = true;
+		private boolean soundsOn = true;
 
-	// -------------------------------------------
-
+		// -------------------------------------------
+	
+	
 	/**
 	 * The player sprite.
 	 */
@@ -54,10 +56,16 @@ public class Player extends GameEntity {
 	 */
 	private Score score;
 
-	public Player(Score score) {
+	/**
+	 * A reference to the boss game entity.
+	 */
+	private Boss boss;
+
+	public Player(Score score, Boss boss) {
 		super(INITIAL_X, INITIAL_Y, INITIAL_VISIBILITY);
 
 		this.score = score;
+		this.boss = boss;
 
 		sprite = new Sprite(StateMachine.spriteSheet.getSprite(224, 928, 99, 75));
 
@@ -70,16 +78,21 @@ public class Player extends GameEntity {
 		setVelocity(VELOCITY, VELOCITY);
 		drawChildrenFirst(true);
 
-		soundLevel = new Sound("C://Users//Miguel//Documents//space-Something//src//resources//song//mpf.wav");
+		soundLevel = new Sound("C://Users//Miguel//Documents//space-Something//src//resources//song//2.wav");
 		soundShoot = new Sound("C://Users//Miguel//Documents//space-Something//src//resources//song//shoot.wav");
+		soundThird = new Sound("C://Users//Miguel//Documents//space-Something//src//resources//song//1.wav");
 
 		soundLevel.play();
+		soundLevel.setRepeat(true);
+		soundThird.play();
+		soundThird.decreaseVolume(16.0f);
+
 		/**
 		 * Setting the player movements triggers.
 		 */
 
 		// Moving up
-		on(new KeyTriggerEvent(KeyEvent.VK_I, (k, t) -> {
+		on(new KeyTriggerEvent(KeyEvent.VK_UP, (k, t) -> {
 			if (t == KeyTriggerEvent.KEY_PRESSED)
 				moveUp(false);
 			else if (t == KeyTriggerEvent.KEY_RELEASED)
@@ -87,7 +100,7 @@ public class Player extends GameEntity {
 		}));
 
 		// Moving down
-		on(new KeyTriggerEvent(KeyEvent.VK_K, (k, t) -> {
+		on(new KeyTriggerEvent(KeyEvent.VK_DOWN, (k, t) -> {
 			if (t == KeyTriggerEvent.KEY_PRESSED)
 				moveDown(false);
 			else if (t == KeyTriggerEvent.KEY_RELEASED)
@@ -95,7 +108,7 @@ public class Player extends GameEntity {
 		}));
 
 		// Moving right
-		on(new KeyTriggerEvent(KeyEvent.VK_L, (k, t) -> {
+		on(new KeyTriggerEvent(KeyEvent.VK_RIGHT, (k, t) -> {
 			if (t == KeyTriggerEvent.KEY_PRESSED)
 				moveRight(true);
 			else if (t == KeyTriggerEvent.KEY_RELEASED)
@@ -103,7 +116,7 @@ public class Player extends GameEntity {
 		}));
 
 		// Moving left
-		on(new KeyTriggerEvent(KeyEvent.VK_J, (k, t) -> {
+		on(new KeyTriggerEvent(KeyEvent.VK_LEFT, (k, t) -> {
 			if (t == KeyTriggerEvent.KEY_PRESSED)
 				moveLeft(true);
 			else if (t == KeyTriggerEvent.KEY_RELEASED)
@@ -111,11 +124,10 @@ public class Player extends GameEntity {
 		}));
 
 		// Shoot
-		on(new KeyTriggerEvent(KeyEvent.VK_Q, (k, t) -> {
+		on(new KeyTriggerEvent(KeyEvent.VK_SPACE, (k, t) -> {
 			if (t == KeyTriggerEvent.KEY_RELEASED) {
 				Shot shot = new Shot(x + getWidth() / 2, y);
 				addChild(shot);
-
 				if (soundsOn == true) {
 					shootSongPlay();
 
@@ -126,10 +138,10 @@ public class Player extends GameEntity {
 			}
 
 		}));
-
+		
 		on(new KeyTriggerEvent(KeyEvent.VK_F1, (k, t) -> {
 			if (t == KeyTriggerEvent.KEY_RELEASED) {
-
+				soundThird.stop();
 				soundLevel.stop();
 				shootSongStop();
 			}
@@ -138,13 +150,14 @@ public class Player extends GameEntity {
 		
 		on(new KeyTriggerEvent(KeyEvent.VK_F2, (k, t) -> {
 			if (t == KeyTriggerEvent.KEY_RELEASED && soundsOn == false) {
-
+				soundThird.play();
 				soundLevel.play();
 				soundsOn = true;
 			}
 
 		}));
 	}
+	
 
 	@Override
 	public void update() {
@@ -163,21 +176,17 @@ public class Player extends GameEntity {
 		}
 	}
 
-	@Override
-	public void draw(Graphics g) {
-		super.draw(g);
-	}
-
 	public void shootSongPlay() {
 		soundShoot = new Sound("C://Users//Miguel//Documents//space-Something//src//resources//song//shoot.wav");
 		soundShoot.play();
+		soundShoot.decreaseVolume(19.0f);
 	}
 
 	public void shootSongStop() {
 		soundShoot.stop();
 		soundsOn = false;
 	}
-
+	
 	private class Shot extends GameEntity {
 
 		// ---------------- Constants ----------------
@@ -195,11 +204,30 @@ public class Player extends GameEntity {
 		 */
 		private Sprite sprite;
 
+		private Animation bossHitAnimation;
+
 		public Shot(int x, int y) {
 			super(x - SHOT_WIDTH / 2, y, INITIAL_VISIBILITY);
 
+			// Collision with boss animation
+			bossHitAnimation = new Animation(
+					new Sprite[] { new Sprite(StateMachine.spriteSheet.getSprite(0, 0, 96, 96), 50, 50),
+							new Sprite(StateMachine.spriteSheet.getSprite(96, 0, 96, 96), 50, 50),
+							new Sprite(StateMachine.spriteSheet.getSprite(192, 0, 96, 96), 50, 50),
+							new Sprite(StateMachine.spriteSheet.getSprite(288, 0, 96, 96), 50, 50),
+							new Sprite(StateMachine.spriteSheet.getSprite(384, 0, 96, 96), 50, 50),
+							new Sprite(StateMachine.spriteSheet.getSprite(480, 0, 96, 96), 50, 50),
+							new Sprite(StateMachine.spriteSheet.getSprite(576, 0, 96, 96), 50, 50),
+							new Sprite(StateMachine.spriteSheet.getSprite(672, 0, 96, 96), 50, 50),
+							new Sprite(StateMachine.spriteSheet.getSprite(768, 0, 96, 96), 50, 50),
+							new Sprite(StateMachine.spriteSheet.getSprite(864, 0, 96, 96), 50, 50),
+							new Sprite(StateMachine.spriteSheet.getSprite(960, 0, 96, 96), 50, 50),
+							new Sprite(StateMachine.spriteSheet.getSprite(1056, 0, 96, 96), 50, 50), },
+					3, Animation.NO_LOOP, true);
+			addAnimation("boss-hit", bossHitAnimation);
+			setAnimation(null);
+			
 			sprite = new Sprite(StateMachine.spriteSheet.getSprite(858, 326, SHOT_WIDTH, SHOT_HEIGHT));
-
 			setStaticSprite(sprite);
 
 			setVelocityY(SHOT_VELOCITY);
@@ -213,6 +241,30 @@ public class Player extends GameEntity {
 					score.increment(Constants.ALIEN_SCORE);
 				}
 			}));
+
+			on(new CollisionEvent("boss", (go, i) -> {
+				if (!go.isDead() && listenCollision) {
+					boss.decrementLife();
+					moveUp(false);
+					die(true);
+				}
+			}));
+		}
+		
+		@Override
+		public void update() {
+			super.update();
+			
+			if (!listenCollision && getActiveAnimation().hasEnded())
+				die();
+		}
+		
+		private void die(boolean isBoss) {
+			if (isBoss) {
+				setListenCollision(false);
+				setAnimation("boss-hit");
+				startAnimation();
+			}
 		}
 
 	}

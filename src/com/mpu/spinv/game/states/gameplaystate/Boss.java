@@ -35,7 +35,7 @@ public class Boss extends GameEntity {
 	private static final int INITIAL_X = Constants.WINDOW_WIDTH / 2 - WIDTH / 2;
 	private static final int INITIAL_Y = 10;
 
-	private final int VELOCITY = 5;
+	private final int VELOCITY = 9;
 
 	private static final boolean INITIAL_VISIBILITY = false;
 
@@ -43,7 +43,7 @@ public class Boss extends GameEntity {
 
 	private final int SCORE_VALUE = 50;
 
-	private int life = 30;
+	private int life = 60;
 
 	/**
 	 * A reference to the score object.

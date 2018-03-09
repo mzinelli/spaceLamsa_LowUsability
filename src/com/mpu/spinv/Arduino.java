@@ -14,8 +14,8 @@ public class Arduino {
 
 		String ask = "";
 
-		while (ask != "never") {
-			// for (int i = 0; i < 100; i++) {
+		//while (ask != "never") {
+			for (int i = 0; i < 900; i++) {
 			exl.plan();
 
 			ask = "bpm";
